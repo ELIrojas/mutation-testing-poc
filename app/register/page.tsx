@@ -5,6 +5,9 @@ import { ArrowLeft, User, Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-rea
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import { validateRegister, getPasswordStrength } from "../../utils/validators";
+import { saveUsers } from "@/utils/session";
+
 export default function RegisterPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -14,17 +17,10 @@ export default function RegisterPage() {
     firstName: "", lastName: "", email: "", password: "", confirm: "", terms: false,
   });
 
-  const getStrength = (p: string) => {
-    if (p.length === 0) return 0;
-    if (p.length < 6) return 1;
-    if (p.length < 10) return 2;
-    if (/[A-Z]/.test(p) && /[0-9]/.test(p)) return 4;
-    return 3;
-  };
 
   const strengthLabel = ["", "Weak", "Fair", "Good", "Strong"];
   const strengthColor = ["", "bg-red-500/60", "bg-yellow-500/60", "bg-blue-500/60", "bg-violet-500/60"];
-  const strength = getStrength(form.password);
+  const strength = getPasswordStrength(form.password);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -32,10 +28,13 @@ export default function RegisterPage() {
     setError("");
   };
 
-  const handleSubmit = () => {
-    if (!form.firstName || !form.email || !form.password) return setError("Fill in all required fields.");
-    if (form.password !== form.confirm) return setError("Passwords do not match.");
-    if (!form.terms) return setError("You must accept the terms.");
+
+const handleSubmit = () => {
+    const validationError = validateRegister(form); 
+    if (validationError) {
+      setError(validationError); 
+      return;
+    }
 
     const existing = JSON.parse(localStorage.getItem("fg_users") || "[]");
     if (existing.find((u: { email: string }) => u.email === form.email)) {
@@ -51,7 +50,7 @@ export default function RegisterPage() {
       createdAt: new Date().toISOString(),
     };
 
-    localStorage.setItem("fg_users", JSON.stringify([...existing, newUser]));
+  saveUsers([...existing, newUser]);
     router.push("/login");
   };
 
