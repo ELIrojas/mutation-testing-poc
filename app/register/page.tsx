@@ -18,7 +18,7 @@ export default function RegisterPage() {
   });
 
 
-  const strengthLabel = ["", "Weak", "Fair", "Good", "Strong"];
+  const strengthLabel = ["", "Débil", "Regular", "Buena", "Fuerte"];
   const strengthColor = ["", "bg-red-500/60", "bg-yellow-500/60", "bg-blue-500/60", "bg-violet-500/60"];
   const strength = getPasswordStrength(form.password);
 
@@ -68,7 +68,7 @@ const handleSubmit = () => {
         <h1 className="text-4xl font-extrabold tracking-tight text-[#f0eeff] mb-1">
           Register <span className="text-violet-500">Form</span>
         </h1>
-        <p className="text-[#5a5870] text-sm font-light mb-8">User registration validations.</p>
+        <p className="text-[#5a5870] text-sm font-light mb-8">Llene los campos requeridos.</p>
 
         <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 flex flex-col gap-5">
 

@@ -34,8 +34,6 @@ const handleSubmit = () => {
   router.push("/principal");
 };
 
-
-
   return (
     <main className="min-h-screen bg-[#080810] text-white relative overflow-hidden flex items-center justify-center">
       <div className="absolute -top-32 -left-20 w-80 h-80 rounded-full bg-violet-600/10 blur-3xl pointer-events-none" />
@@ -50,7 +48,7 @@ const handleSubmit = () => {
         <h1 className="text-4xl font-extrabold tracking-tight text-[#f0eeff] mb-1">
           Login <span className="text-violet-500">Form</span>
         </h1>
-        <p className="text-[#5a5870] text-sm font-light mb-8">Email and password validation.</p>
+        <p className="text-[#5a5870] text-sm font-light mb-8">Correo y Contraseña.</p>
 
         <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 flex flex-col gap-5">
 
