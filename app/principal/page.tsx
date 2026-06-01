@@ -53,7 +53,7 @@ export default function PrincipalPage() {
         <div className="grid grid-cols-2 gap-4 mb-8">
           <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-5">
             <p className="font-mono text-[10px] tracking-[0.15em] text-violet-500 uppercase mb-1">
-              Logged in as
+              Usuario Logeado
             </p>
             <p className="text-lg font-bold text-[#e8e5ff]">
               {session.firstName} {session.lastName}
@@ -62,7 +62,7 @@ export default function PrincipalPage() {
           </div>
           <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-5">
             <p className="font-mono text-[10px] tracking-[0.15em] text-violet-500 uppercase mb-1">
-              Total users
+              Total usuarios
             </p>
             <p className="text-4xl font-extrabold text-[#e8e5ff]">{users.length}</p>
             <p className="font-mono text-[11px] text-[#4a4870]">registered accounts</p>
@@ -70,7 +70,7 @@ export default function PrincipalPage() {
         </div>
 
         <p className="font-mono text-[10px] tracking-[0.15em] text-violet-500 uppercase mb-4">
-          Registered users
+          Usuarios Registrados
         </p>
         <div className="flex flex-col gap-3">
           {users.map((u) => (
