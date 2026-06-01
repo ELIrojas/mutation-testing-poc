@@ -4,6 +4,8 @@ import { useState } from "react";
 import { ArrowLeft, Mail, Lock, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { validateLogin } from "../../utils/validators";
+import { getUsers, saveSession } from "@/utils/session";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,18 +17,24 @@ export default function LoginPage() {
     setError("");
   };
 
-  const handleSubmit = () => {
-    const users = JSON.parse(localStorage.getItem("fg_users") || "[]");
-    const match = users.find(
-      (u: { email: string; password: string }) =>
-        u.email === form.email && u.password === form.password
-    );
+const handleSubmit = () => {
+  const validationError = validateLogin(form);
+  if (validationError) {
+    return setError(validationError);
+  }
 
-    if (!match) return setError("Invalid email or password.");
+  const users = getUsers();
+  const user = users.find((u) => u.email === form.email);
 
-    localStorage.setItem("fg_session", JSON.stringify(match));
-    router.push("/principal");
-  };
+  if (!user || user.password !== form.password) {
+    return setError("Invalid email or password.");
+  }
+
+  saveSession(user);
+  router.push("/principal");
+};
+
+
 
   return (
     <main className="min-h-screen bg-[#080810] text-white relative overflow-hidden flex items-center justify-center">
