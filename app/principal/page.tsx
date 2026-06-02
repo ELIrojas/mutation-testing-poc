@@ -2,7 +2,6 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { LogOut, User, Mail, Calendar } from 'lucide-react'
 import { getSession, clearSession, getUsers, UserRecord } from '../../utils/session'
 
 export default function PrincipalPage() {
@@ -46,7 +45,7 @@ export default function PrincipalPage() {
             onClick={handleLogout}
             className="flex items-center gap-2 border border-white/[0.08] text-[#3a3850] font-mono text-[11px] tracking-wider uppercase px-4 py-2 rounded-xl hover:border-red-500/30 hover:text-red-400 transition-all"
           >
-            <LogOut className="w-3.5 h-3.5" /> Logout
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout
           </button>
         </div>
 
@@ -95,15 +94,15 @@ export default function PrincipalPage() {
                 </div>
                 <div className="flex items-center gap-4 mt-0.5">
                   <p className="flex items-center gap-1 font-mono text-[11px] text-[#4a4870]">
-                    <Mail className="w-3 h-3" /> {u.email}
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> {u.email}
                   </p>
                   <p className="flex items-center gap-1 font-mono text-[11px] text-[#3a3850]">
-                    <Calendar className="w-3 h-3" />
+                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                     {new Date(u.createdAt).toLocaleDateString()}
                   </p>
                 </div>
               </div>
-              <User className="w-4 h-4 text-[#2a2840] shrink-0" />
+              <svg className="w-4 h-4 text-[#2a2840] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
             </div>
           ))}
         </div>
