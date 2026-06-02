@@ -31,13 +31,13 @@ export default function Home() {
       <section className="relative z-10 max-w-7xl mx-auto px-6 py-10">
         <div className="mb-10">
           <p className="font-mono text-[11px] tracking-[0.2em] text-violet-500 uppercase mb-1">
-             Mutation testing
+             Mutación de formularios para pruebas y validación.
           </p>
           <h1 className="text-5xl font-extrabold tracking-tight text-[#f0eeff] mb-1">
             Form<span className="text-violet-500">Guard</span>
           </h1>
           <p className="text-[#5a5870] text-sm font-light">
-            Validación y pruebas de formularios        </p>
+            Validación y pruebas de formularios.        </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 max-w-2xl">
