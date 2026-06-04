@@ -42,10 +42,23 @@ export function validateLogin(form: LoginData): string {
   return "";
 }
 
+// export function getPasswordStrength(password: string): number {
+//   if (password.length === 0) return 0;
+//   if (password.length < 6) return 1;
+//   if (password.length < 10) return 2;
+//   if (/[A-Z]/.test(password) && /[0-9]/.test(password)) return 4;
+//   return 3;
+// }
+
 export function getPasswordStrength(password: string): number {
   if (password.length === 0) return 0;
   if (password.length < 6) return 1;
-  if (password.length < 10) return 2;
-  if (/[A-Z]/.test(password) && /[0-9]/.test(password)) return 4;
-  return 3;
+
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+
+  if (hasUppercase && hasNumber) return 4;
+  if (password.length >= 10) return 3;
+
+  return 2;
 }

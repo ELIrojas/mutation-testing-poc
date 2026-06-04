@@ -63,12 +63,12 @@ export default function PrincipalPage() {
             <p className="font-mono text-[10px] tracking-[0.15em] text-violet-500 uppercase mb-1">
               Total usuarios
             </p>
-            {/* <p className="text-4xl font-extrabold text-[#e8e5ff]">{users.length}</p> */}
+            <p className="text-4xl font-extrabold text-[#e8e5ff]">{users.length}</p>
             <p className="font-mono text-[11px] text-[#4a4870]">registered accounts</p>
           </div>
         </div>
 
-        {/* <p className="font-mono text-[10px] tracking-[0.15em] text-violet-500 uppercase mb-4">
+        <p className="font-mono text-[10px] tracking-[0.15em] text-violet-500 uppercase mb-4">
           Usuarios Registrados
         </p>
         <div className="flex flex-col gap-3">
@@ -105,7 +105,7 @@ export default function PrincipalPage() {
               <svg className="w-4 h-4 text-[#2a2840] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </main>
   )
