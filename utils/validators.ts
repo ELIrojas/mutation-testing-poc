@@ -14,9 +14,15 @@ export interface LoginData {
 }
 
 export function validateRegister(form: RegisterData): string {
-  if (!form.firstName || !form.email || !form.password) {
-    return "Fill in all required fields.";
-  }
+  if (
+  !form.firstName ||
+  !form.lastName ||
+  !form.email ||
+  !form.password ||
+  !form.confirm
+) {
+  return "Fill in all required fields.";
+}
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
     return "Invalid email address.";
   }

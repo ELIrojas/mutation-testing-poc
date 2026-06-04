@@ -20,14 +20,14 @@ describe("validateLogin", () => {
 });
 
 describe("validateRegister", () => {
-  const base = {
-    firstName: "John",
-    lastName: "",
-    email: "john@test.com",
-    password: "Abcdef1",
-    confirm: "Abcdef1",
-    terms: true,
-  };
+ const base = {
+  firstName: "Juan",
+  lastName: "Pérez",      
+  email: "juan@test.com",
+  password: "secret123",
+  confirm: "secret123",   
+  terms: true,
+};
 
   it("retorna error si firstName está vacío", () => {
     expect(validateRegister({ ...base, firstName: "" })).toBe("Fill in all required fields.");
