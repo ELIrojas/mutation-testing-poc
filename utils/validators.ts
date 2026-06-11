@@ -23,7 +23,8 @@ export function validateRegister(form: RegisterData): string {
 ) {
   return "Fill in all required fields.";
 }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+
+  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(form.email)) {
     return "Invalid email address.";
   }
   if (form.password.length < 6) {
@@ -42,19 +43,13 @@ export function validateLogin(form: LoginData): string {
   if (!form.email || !form.password) {
     return "Please fill in all fields.";
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(form.email)) {
     return "Invalid email address.";
   }
   return "";
 }
 
-// export function getPasswordStrength(password: string): number {
-//   if (password.length === 0) return 0;
-//   if (password.length < 6) return 1;
-//   if (password.length < 10) return 2;
-//   if (/[A-Z]/.test(password) && /[0-9]/.test(password)) return 4;
-//   return 3;
-// }
+
 
 export function getPasswordStrength(password: string): number {
   if (password.length === 0) return 0;

@@ -1,81 +1,148 @@
-import { describe, it, expect } from "vitest";
-import { validateLogin, validateRegister, getPasswordStrength } from "../utils/validators";
+import { describe, it, expect } from 'vitest'
+import {
+  validateLogin,
+  validateRegister,
+  getPasswordStrength,
+} from '../utils/validators'
 
-describe("validateLogin", () => {
-  it("retorna error si email está vacío", () => {
-    expect(validateLogin({ email: "", password: "123456" })).toBe("Please fill in all fields.");
-  });
+describe('validateLogin', () => {
+  it('retorna error si email está vacío', () => {
+    expect(validateLogin({ email: '', password: '123456' })).toBe(
+      'Please fill in all fields.'
+    )
+  })
 
-  it("retorna error si password está vacío", () => {
-    expect(validateLogin({ email: "test@test.com", password: "" })).toBe("Please fill in all fields.");
-  });
+  it('retorna error si password está vacío', () => {
+    expect(validateLogin({ email: 'test@test.com', password: '' })).toBe(
+      'Please fill in all fields.'
+    )
+  })
 
-  it("retorna error si email es inválido", () => {
-    expect(validateLogin({ email: "noesvalido", password: "123456" })).toBe("Invalid email address.");
-  });
+  it('retorna error si email es inválido', () => {
+    expect(validateLogin({ email: 'noesvalido', password: '123456' })).toBe(
+      'Invalid email address.'
+    )
+  })
 
-  it("retorna vacío si todo es válido", () => {
-    expect(validateLogin({ email: "test@test.com", password: "123456" })).toBe("");
-  });
+  it('retorna vacío si todo es válido', () => {
+    expect(validateLogin({ email: 'test@test.com', password: '123456' })).toBe(
+      ''
+    )
+  })
+  it("retorna error si email tiene prefijo inválido antes del formato", () => {
+  expect(validateLogin({ email: "!!!user@domain.com", password: "123456" })).toBe("Invalid email address.");
 });
 
-describe("validateRegister", () => {
- const base = {
-  firstName: "Juan",
-  lastName: "Pérez",      
-  email: "juan@test.com",
-  password: "secret123",
-  confirm: "secret123",   
-  terms: true,
-};
+it("retorna error si email no tiene extensión de dominio", () => {
+  expect(validateLogin({ email: "user@domain", password: "123456" })).toBe("Invalid email address.");
+});
+it("retorna error si email tiene caracteres inválidos al final", () => {
+  expect(validateLogin({ email: "user@domain.com!!!", password: "123456" })).toBe("Invalid email address.");
+});
+})
 
-  it("retorna error si firstName está vacío", () => {
-    expect(validateRegister({ ...base, firstName: "" })).toBe("Fill in all required fields.");
-  });
+describe('validateRegister', () => {
+  const base = {
+    firstName: 'Juan',
+    lastName: 'Pérez',
+    email: 'juan@test.com',
+    password: 'secret123',
+    confirm: 'secret123',
+    terms: true,
+  }
 
-  it("retorna error si email está vacío", () => {
-    expect(validateRegister({ ...base, email: "" })).toBe("Fill in all required fields.");
-  });
+  it('retorna error si firstName está vacío', () => {
+    expect(validateRegister({ ...base, firstName: '' })).toBe(
+      'Fill in all required fields.'
+    )
+  })
 
-  it("retorna error si email es inválido", () => {
-    expect(validateRegister({ ...base, email: "noesvalido" })).toBe("Invalid email address.");
-  });
+  it('retorna error si email está vacío', () => {
+    expect(validateRegister({ ...base, email: '' })).toBe(
+      'Fill in all required fields.'
+    )
+  })
 
-  it("retorna error si password tiene menos de 6 caracteres", () => {
-    expect(validateRegister({ ...base, password: "abc", confirm: "abc" })).toBe("Password must be at least 6 characters.");
-  });
+  it('retorna error si email es inválido', () => {
+    expect(validateRegister({ ...base, email: 'noesvalido' })).toBe(
+      'Invalid email address.'
+    )
+  })
 
-  it("retorna error si passwords no coinciden", () => {
-    expect(validateRegister({ ...base, confirm: "diferente" })).toBe("Passwords do not match.");
-  });
+  it('retorna error si password tiene menos de 6 caracteres', () => {
+    expect(validateRegister({ ...base, password: 'abc', confirm: 'abc' })).toBe(
+      'Password must be at least 6 characters.'
+    )
+  })
 
-  it("retorna error si terms no está aceptado", () => {
-    expect(validateRegister({ ...base, terms: false })).toBe("You must accept the terms.");
-  });
+  it('retorna error si passwords no coinciden', () => {
+    expect(validateRegister({ ...base, confirm: 'diferente' })).toBe(
+      'Passwords do not match.'
+    )
+  })
 
-  it("retorna vacío si todo es válido", () => {
-    expect(validateRegister(base)).toBe("");
-  });
+  it('retorna error si terms no está aceptado', () => {
+    expect(validateRegister({ ...base, terms: false })).toBe(
+      'You must accept the terms.'
+    )
+  })
+
+  it('retorna vacío si todo es válido', () => {
+    expect(validateRegister(base)).toBe('')
+  })
+  it('retorna vacío si password tiene exactamente 6 caracteres', () => {
+    expect(
+      validateRegister({ ...base, password: 'abcdef', confirm: 'abcdef' })
+    ).toBe('')
+  })
+
+  it('retorna error si email tiene prefijo inválido antes del formato', () => {
+    expect(validateRegister({ ...base, email: '!!!user@domain.com' })).toBe(
+      'Invalid email address.'
+    )
+  })
+
+  it('retorna error si email no tiene extensión de dominio', () => {
+    expect(validateRegister({ ...base, email: 'user@domain' })).toBe(
+      'Invalid email address.'
+    )
+  })
+  it("retorna error si email tiene caracteres inválidos al final", () => {
+  expect(validateRegister({ ...base, email: "user@domain.com!!!" })).toBe("Invalid email address.");
+});
+})
+
+describe('getPasswordStrength', () => {
+  it('retorna 0 si password está vacío', () => {
+    expect(getPasswordStrength('')).toBe(0)
+  })
+
+  it('retorna 1 si password tiene menos de 6 caracteres', () => {
+    expect(getPasswordStrength('abc')).toBe(1)
+  })
+
+  it('retorna 2 si password tiene entre 6 y 9 caracteres', () => {
+    expect(getPasswordStrength('abcdef')).toBe(2)
+  })
+
+  it('retorna 4 si password tiene mayúscula y número', () => {
+    expect(getPasswordStrength('Abcdef1')).toBe(4)
+  })
+
+  it('retorna 3 si password es largo pero sin mayúscula ni número', () => {
+    expect(getPasswordStrength('abcdefghij')).toBe(3)
+  })
+
+  it("retorna 2 si password tiene mayúscula pero no número", () => {
+  expect(getPasswordStrength("Abcdef")).toBe(2);
 });
 
-describe("getPasswordStrength", () => {
-  it("retorna 0 si password está vacío", () => {
-    expect(getPasswordStrength("")).toBe(0);
-  });
-
-  it("retorna 1 si password tiene menos de 6 caracteres", () => {
-    expect(getPasswordStrength("abc")).toBe(1);
-  });
-
-  it("retorna 2 si password tiene entre 6 y 9 caracteres", () => {
-    expect(getPasswordStrength("abcdef")).toBe(2);
-  });
-
-  it("retorna 4 si password tiene mayúscula y número", () => {
-    expect(getPasswordStrength("Abcdef1")).toBe(4);
-  });
-
-  it("retorna 3 si password es largo pero sin mayúscula ni número", () => {
-    expect(getPasswordStrength("abcdefghij")).toBe(3);
-  });
+it("retorna 2 si password tiene número pero no mayúscula", () => {
+  expect(getPasswordStrength("abcde1")).toBe(2);
 });
+
+it("retorna 4 solo si tiene mayúscula Y número, no solo uno", () => {
+  expect(getPasswordStrength("Abcdef")).not.toBe(4);
+  expect(getPasswordStrength("abcde1")).not.toBe(4);
+});
+})
