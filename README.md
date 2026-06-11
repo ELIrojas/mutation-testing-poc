@@ -36,10 +36,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## About this project
-
-This project was created as a Proof of Concept to evaluate whether Mutation Testing provides additional evidence about unit test quality beyond traditional Code Coverage metrics.
-
-Read the full article on Medium: [Cuando el 100% No Es Suficiente]([enlace-a-tu-articulo](https://medium.com/@rojasellie14/cuando-el-100-no-es-suficiente-da71d99a5ad7))
-
-MIT License — Elizeth Rojas Delgado
